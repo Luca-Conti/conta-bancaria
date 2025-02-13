@@ -14,9 +14,11 @@ class ContaBancaria():
     
     @classmethod
     def listar(cls):
-        print(f'{'Titular'.ljust(25)}')
+        print(f'{'Contas'.ljust(25)}')
         for conta in cls.contas:
             print(f'{conta._titular.ljust(25)}')
+
+
 def exibir_texto(texto):
     os.system('cls')
     print('-' * (len(texto)
@@ -58,32 +60,32 @@ def cadastra_conta():
 
 def listar_conta():
     exibir_texto(texto='Acessar Conta')
-    conta_encontrada = False
     ContaBancaria.listar()
-    ver_opicao = input('qual o nome de conta que vc quer acessar')
+    ver_opicao = input('Qual o nome da conta que você quer acessar: ')
+
     for conta in ContaBancaria.contas:
         if ver_opicao == conta._titular:
-            exibir_texto(texto=f'Verficação de acesso a conta {conta.titular}')
-            verificar_email = input('digite o email da conta')
-        else:
-            print('Nome errado')
-            input('Digite algo pra voltar pro menu')
-            main()
-            if verificar_email == conta.email:
-                print('email certo')
-                verficar_senha = input('digite a senha da conta')
-            else:
-                print('Email errado')
-                input('Digite algo pra voltar pro menu')
-                main()
-                if verficar_senha == conta.senha:
-                    print('Você acessou a conta')
-                else:
-                    print('Senha errado')
-                    input('Digite algo pra voltar pro menu')
-                    main()
+            exibir_texto(texto=f'Verificação de acesso à conta {conta._titular}')
+            verificar_email = input('Digite o e-mail da conta: ')
 
+            if verificar_email == conta.email:
+                print('E-mail correto.')
+                verificar_senha = input('Digite a senha da conta: ')
+
+                if verificar_senha == conta.senha:
+                    print('Você acessou a conta!')
+                    voltar_pro_menu()
+                else:
+                    print('Senha errada.')
+                    voltar_pro_menu()
+            else:
+                print('E-mail errado.')
+                voltar_pro_menu()
+            return  
+
+    print('Conta não encontrada.')
     voltar_pro_menu()
+
 
 def opicao():
     try:
