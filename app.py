@@ -29,10 +29,47 @@ def exibir_texto(texto):
     print(Fore.RED + '-' * (len(texto) + 1) + Fore.RESET)
     print()
 
+def acesso_a_conta_opcao_errada():
+    exibir_texto(texto='Opição Errada')
+    input('Digite algo para voltar pro menu')
+    acesso_a_conta()
+
+def acesso_a_conta_opicao():
+    try:
+        print('''
+              Opção
+          
+          1. Sacar
+          2. Tranferir
+          3. voltar ao Menu
+              ''')
+        ver_opcao = int(input('Escolha uma opção'))
+        
+        if ver_opcao == 1:
+            print('sacar')
+        elif ver_opcao == 2:
+            print('tranferir')
+        elif ver_opcao == 3:
+            voltar_pro_menu()
+        else:
+            acesso_a_conta_opcao_errada()
+
+    except:
+        acesso_a_conta_opcao_errada()
+
+
 def voltar_pro_menu():
     input('Digite algo para voltar pro menu: ')
     os.system('cls')
     main()
+
+def acesso_a_conta():
+    for conta in ContaBancaria.contas:
+        exibir_texto(texto=f'Conta de {conta._titular} acessada')
+        print(f'O seu saldo é {conta._saldo}')
+        acesso_a_conta_opicao()
+
+
 
 def titulo():
     print(Fore.RED + '''
@@ -84,7 +121,7 @@ def listar_conta():
                 return
         
         if verficar_senha == conta._senha:
-            print(Fore.GREEN + 'Você acessou a conta' + Fore.RESET)
+            acesso_a_conta()
             conta_encontrada = not conta_encontrada
 
 
