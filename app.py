@@ -7,7 +7,7 @@ class ContaBancaria():
         self._titular = titular
         self._saldo = saldo
         self._email = email
-        self.senha = senha
+        self._senha = senha
         self._ativar = True
         ContaBancaria.contas.append(self)
     def __str__(self):
@@ -49,7 +49,7 @@ def cadastra_conta():
     exibir_texto(texto='Cadastra Conta')
     nome = input('qual é o do titular da conta: ').title()
     saldo = float(input('qual é o saldo da sua conta: '))
-    email = input('Digite o um email para cadastra não sua conta: ')
+    email = input('Digite o um email para cadastra sua conta: ').lower()
     senha = input('Digite uma senha com no minimo 8 digitos: ')
     confirmacao_de_senha = input('Confirme a senha: ')
     senha_numero = 'aaaaaaaa'
@@ -65,11 +65,11 @@ def listar_conta():
     exibir_texto(texto='Acessar Conta')
     conta_encontrada = False
     ContaBancaria.listar()
-    ver_opicao = input('qual o nome de conta que vc quer acessar: ')
+    ver_opicao = input('qual o nome de conta que vc quer acessar: ').title()
     for conta in ContaBancaria.contas:
         if ver_opicao == conta._titular:
             exibir_texto(texto=f'Verficação de acesso a conta {conta._titular}')
-            verificar_email = input('digite o email da conta: ')
+            verificar_email = input('digite o email da conta: ').lower()
         else:
             print('Nome errado')
             voltar_pro_menu()
