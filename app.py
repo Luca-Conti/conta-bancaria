@@ -1,10 +1,12 @@
 import os
+
+from colorama import Fore, Back, Style
 class ContaBancaria():
     contas = []
     def __init__(self, titular, saldo, email, senha):
         self._titular = titular
         self._saldo = saldo
-        self.email = email
+        self._email = email
         self.senha = senha
         self._ativar = True
         ContaBancaria.contas.append(self)
@@ -21,10 +23,10 @@ class ContaBancaria():
 
 def exibir_texto(texto):
     os.system('cls')
-    print('-' * (len(texto)
-     + 1))
-    print(texto)
-    print('-' * (len(texto) + 1))
+    print(Fore.RED + '-' * (len(texto)
+     + 1) + Fore.RESET)
+    print(Fore.RED + texto + Fore.RESET)
+    print(Fore.RED + '-' * (len(texto) + 1) + Fore.RESET)
     print()
 
 def voltar_pro_menu():
@@ -33,14 +35,15 @@ def voltar_pro_menu():
     main()
 
 def titulo():
-    print('''
+    print(Fore.RED + '''
 ██████╗░░█████╗░███╗░░██╗░█████╗░░█████╗░  ██╗░░░░░██╗░░░██╗░█████╗░░█████╗░
 ██╔══██╗██╔══██╗████╗░██║██╔══██╗██╔══██╗  ██║░░░░░██║░░░██║██╔══██╗██╔══██╗
 ██████╦╝███████║██╔██╗██║██║░░╚═╝██║░░██║  ██║░░░░░██║░░░██║██║░░╚═╝███████║
 ██╔══██╗██╔══██║██║╚████║██║░░██╗██║░░██║  ██║░░░░░██║░░░██║██║░░██╗██╔══██║
 ██████╦╝██║░░██║██║░╚███║╚█████╔╝╚█████╔╝  ███████╗╚██████╔╝╚█████╔╝██║░░██║
 ╚═════╝░╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░░╚════╝░  ╚══════╝░╚═════╝░░╚════╝░╚═╝░░╚═╝
-''')
+''' + Fore.RESET
+)
 
 def cadastra_conta():
     exibir_texto(texto='Cadastra Conta')
@@ -60,36 +63,38 @@ def cadastra_conta():
 
 def listar_conta():
     exibir_texto(texto='Acessar Conta')
+    conta_encontrada = False
     ContaBancaria.listar()
-    ver_opicao = input('Qual o nome da conta que você quer acessar: ')
-
+    ver_opicao = input('qual o nome de conta que vc quer acessar: ')
     for conta in ContaBancaria.contas:
         if ver_opicao == conta._titular:
-            exibir_texto(texto=f'Verificação de acesso à conta {conta._titular}')
-            verificar_email = input('Digite o e-mail da conta: ')
-
-            if verificar_email == conta.email:
-                print('E-mail correto.')
-                verificar_senha = input('Digite a senha da conta: ')
-
-                if verificar_senha == conta.senha:
-                    print('Você acessou a conta!')
-                    voltar_pro_menu()
-                else:
-                    print('Senha errada.')
-                    voltar_pro_menu()
-            else:
-                print('E-mail errado.')
+            exibir_texto(texto=f'Verficação de acesso a conta {conta._titular}')
+            verificar_email = input('digite o email da conta: ')
+        else:
+            print('Nome errado')
+            voltar_pro_menu()
+            return
+    
+        if verificar_email == conta._email:
+            print(Fore.GREEN + 'email certo' + Fore.RESET)
+            verficar_senha = input('digite a senha da conta: ')
+        else:
+                print(Fore.RED + 'Email errado' + Fore.RESET)
                 voltar_pro_menu()
-            return  
+                return
+        
+        if verficar_senha == conta._senha:
+            print(Fore.GREEN + 'Você acessou a conta' + Fore.RESET)
+            conta_encontrada = not conta_encontrada
 
-    print('Conta não encontrada.')
-    voltar_pro_menu()
 
+        else:
+            print(Fore.RED + 'Senha errado' + Fore.RESET)
+            voltar_pro_menu()
 
 def opicao():
     try:
-        print('''OPIÇÃO
+        print(Style.BRIGHT + '''OPIÇÃO
         
 1. Cadastra Conta
 2. Acessar Conta
