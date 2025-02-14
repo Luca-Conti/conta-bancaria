@@ -167,4 +167,6 @@ def opicao_errada():
 def main():
     titulo()
     opicao()
-main()
+
+if __name__ == '__main__':
+    main()
