@@ -1,5 +1,4 @@
 import os
-
 from colorama import Fore, Back, Style
 class ContaBancaria():
     contas = []
@@ -29,26 +28,49 @@ def exibir_texto(texto):
     print(Fore.RED + '-' * (len(texto) + 1) + Fore.RESET)
     print()
 
-def acesso_a_conta_opcao_errada():
-    exibir_texto(texto='Opição Errada')
-    input('Digite algo para voltar pro menu')
+def acesso_a_conta_adicionar():
+    for conta in ContaBancaria.contas:
+        exibir_texto(texto='Adicionar Dinhero')
+        dinheiro_adicionado = float(input(Fore.GREEN + 'quando dinheiro vc quer adiciona: '))
+
+    saldo = conta._saldo
+    total = saldo + dinheiro_adicionado
+    print(f'O seu saldo foi para {total}' + Fore.RESET)
+    acesso_a_conta_voltar_pro_menu()
+
+def acesso_a_conta_voltar_pro_menu():
+    input('digite algo pra voltar pro menu de contas: ')
     acesso_a_conta()
+
+
+def acesso_a_conta_opcao_errada():
+    exibir_texto(texto='Opição Errada: ')
+    acesso_a_conta_voltar_pro_menu()
+
+def acesso_a_conta_tranferir():
+    for conta in ContaBancaria.contas:
+        exibir_texto(texto='Tranferir')
+        quando_dinheiro_vai_ser_tranferido = float(input('Qundo dinhero vc quer que vai cheja tranferido: '))
+        pra_quem = input('quem é o nome da pessoa que vc quer tranferir: ')
+        print(Fore.GREEN + 'Pronto o dinheiro foi tranferido' + Fore.RESET)
+        acesso_a_conta_voltar_pro_menu()
+        conta._saldo - quando_dinheiro_vai_ser_tranferido
 
 def acesso_a_conta_opicao():
     try:
         print('''
               Opção
           
-          1. Sacar
+          1. Adicionar
           2. Tranferir
           3. voltar ao Menu
               ''')
         ver_opcao = int(input('Escolha uma opção'))
         
         if ver_opcao == 1:
-            print('sacar')
+            acesso_a_conta_adicionar()
         elif ver_opcao == 2:
-            print('tranferir')
+            acesso_a_conta_tranferir()
         elif ver_opcao == 3:
             voltar_pro_menu()
         else:
@@ -121,6 +143,8 @@ def listar_conta():
                 return
         
         if verficar_senha == conta._senha:
+            print(Fore.GREEN + 'Conta acessada' + Fore.RESET)
+            input('Digite algo para acessar a conta')
             acesso_a_conta()
             conta_encontrada = not conta_encontrada
 
