@@ -26,7 +26,6 @@ def acesso_a_conta_voltar_pro_menu():
     input('digite algo pra voltar pro menu de contas: ')
     acesso_a_conta()
 
-
 def acesso_a_conta_opcao_errada():
     exibir_texto(texto='Opição Errada: ')
     acesso_a_conta_voltar_pro_menu()
@@ -38,7 +37,8 @@ def acesso_a_conta_tranferir():
         pra_quem = input('quem é o nome da pessoa que vc quer tranferir: ')
         print(Fore.GREEN + 'Pronto o dinheiro foi tranferido' + Fore.RESET)
         acesso_a_conta_voltar_pro_menu()
-        conta._saldo - quando_dinheiro_vai_ser_tranferido
+    saldo = conta._saldo
+    saldo - quando_dinheiro_vai_ser_tranferido
 
 def acesso_a_conta_opicao():
     try:
@@ -78,6 +78,7 @@ def acesso_a_conta():
 
 
 def titulo():
+    os.system('cls')
     print(Fore.RED + '''
 ██████╗░░█████╗░███╗░░██╗░█████╗░░█████╗░  ██╗░░░░░██╗░░░██╗░█████╗░░█████╗░
 ██╔══██╗██╔══██╗████╗░██║██╔══██╗██╔══██╗  ██║░░░░░██║░░░██║██╔══██╗██╔══██╗
@@ -96,13 +97,14 @@ def cadastra_conta():
     senha = input('Digite uma senha com no minimo 8 digitos: ')
     confirmacao_de_senha = input('Confirme a senha: ')
     senha_numero = 'aaaaaaaa'
-    if senha == confirmacao_de_senha and len(senha) >= len(senha_numero):
-        conta = ContaBancaria(nome, saldo, email, senha)
-        voltar_pro_menu()
-    else:
-        print('Faça o cadastro de novo')
-        input('Digite algo para voltar pro cadastro')
-        cadastra_conta()
+    while senha == confirmacao_de_senha and len(senha) >= len(senha_numero):
+        if senha == confirmacao_de_senha and len(senha) >= len(senha_numero):
+            conta = ContaBancaria(nome, saldo, email, senha)
+            voltar_pro_menu()
+        else:
+            print('Faça o cadastro de novo')
+            input('Digite algo para voltar pro cadastro')
+            cadastra_conta()
 
 def listar_conta():
     exibir_texto(texto='Acessar Conta')
