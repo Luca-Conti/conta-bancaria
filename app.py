@@ -1,8 +1,10 @@
 import os
 from colorama import Fore, Back, Style
 from modelos.Contabancaria import ContaBancaria
+from time import sleep
 
 def exibir_texto(texto):
+    sleep(0.2)
     os.system('cls')
     print(Fore.RED + '-' * (len(texto)
      + 1) + Fore.RESET)
@@ -47,7 +49,7 @@ def acesso_a_conta_opicao():
           2. Tranferir
           3. voltar ao Menu
               ''')
-        ver_opcao = int(input('Escolha uma opção'))
+        ver_opcao = int(input('Escolha uma opção: '))
         
         if ver_opcao == 1:
             acesso_a_conta_adicionar()
@@ -126,7 +128,7 @@ def listar_conta():
         
         if verficar_senha == conta._senha:
             print(Fore.GREEN + 'Conta acessada' + Fore.RESET)
-            input('Digite algo para acessar a conta')
+            sleep(0.5)
             acesso_a_conta()
             conta_encontrada = not conta_encontrada
 
@@ -142,7 +144,7 @@ def opicao():
 1. Cadastra Conta
 2. Acessar Conta
 3. Sair''')
-        opicao_escolida = int(input('Escolha uma opiçaõ: '))
+        opicao_escolida = int(input('Escolha uma opição: '))
     
         if opicao_escolida == 1:
             cadastra_conta()
