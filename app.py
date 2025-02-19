@@ -97,14 +97,16 @@ def cadastra_conta():
     senha = input('Digite uma senha com no minimo 8 digitos: ')
     confirmacao_de_senha = input('Confirme a senha: ')
     senha_numero = 'aaaaaaaa'
-    while senha == confirmacao_de_senha and len(senha) >= len(senha_numero):
+    while senha != confirmacao_de_senha and len(senha_numero) > len(senha):
         if senha == confirmacao_de_senha and len(senha) >= len(senha_numero):
             conta = ContaBancaria(nome, saldo, email, senha)
             voltar_pro_menu()
         else:
-            print('Faça o cadastro de novo')
-            input('Digite algo para voltar pro cadastro')
-            cadastra_conta()
+            senha = ''
+            confirmacao_de_senha = ''
+            senha = input('Digite uma senha com no minimo 8 digitos: ')
+            confirmacao_de_senha = input('Confirme a senha: ')
+            
 
 def listar_conta():
     exibir_texto(texto='Acessar Conta')
