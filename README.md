@@ -15,7 +15,7 @@ O código é organizado em módulos que representam as principais entidades e op
 
 ## Tecnologias Utilizadas
 
-- [Liste aqui as tecnologias, por exemplo: Python.]
+Python
 
 ## Como Executar
 
